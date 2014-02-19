@@ -1,12 +1,15 @@
 "use strict";
 
 $(document).ready(function() {
+   var dropZone = document.getElementById('fileinput');
+   dropZone.addEventListener('dragover', handleDragOver, false);
+   dropZone.addEventListener('drop', handleFileSelect, false);
    $("#fileinput").change(calculate);
 });
 
 // main
 function calculate(evt) {
-  var f = evt.target.files[0]; 
+  var f = evt.target.files; 
 
   if (f) {
     var r = new FileReader();
@@ -24,6 +27,43 @@ function calculate(evt) {
   } else { 
     alert("Failed to load file");
   }
+}
+
+function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+	//calculate
+	var f = evt.target.files; 
+	var output=[];
+	for(var i=0, f; f=files[i]; i++){
+		if (f) {
+			var r = new FileReader();
+			r.onload = function(e) { 
+			var contents = e.target.result;
+      
+			var tokens = lexer(contents);
+			var pretty = tokensToString(tokens);
+      
+			out.className = 'unhidden';
+			initialinput.innerHTML = contents;
+			finaloutput.innerHTML = pretty;
+		}
+	
+		r.readAsText(f);
+		output.push(r);
+		} else { 
+			alert("Failed to load file");
+		}
+	}
+	
+
+  }
+
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
 }
 
 var temp = '<li> <span class = "<%= token.type %>"> <%= match %> </span>\n';
@@ -77,3 +117,5 @@ function lexer(input) {
   }
   return out;
 }
+
+  
