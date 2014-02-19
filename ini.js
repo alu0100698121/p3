@@ -90,7 +90,3 @@ function lexer(input) {
   }
   return out;
 }
-
-//window.onload = function() {
-  
-//};
