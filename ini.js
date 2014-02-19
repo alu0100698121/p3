@@ -2,6 +2,12 @@
 
 $(document).ready(function() {
    $("#fileinput").change(calculate);
+   if (window.localStorage && localStorage.initialinput && localStorage.finaloutput)
+   {
+    out.className = 'unhidden';
+    initialinput.innerHTML = localStorage.initialinput;
+    finaloutput.innerHTML = localStorage.finaloutput;
+   }
 });
 
 // main
@@ -19,7 +25,14 @@ function calculate(evt) {
       out.className = 'unhidden';
       initialinput.innerHTML = contents;
       finaloutput.innerHTML = pretty;
+      
+      if (window.localStorage)
+      {
+	localStorage.initialinput = contents; 
+	localStorage.finaloutput = pretty;
+      }
     }
+    
     r.readAsText(f);
   } else { 
     alert("Failed to load file");
@@ -77,3 +90,7 @@ function lexer(input) {
   }
   return out;
 }
+
+//window.onload = function() {
+  
+//};
