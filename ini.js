@@ -1,16 +1,16 @@
 "use strict";
 
 $(document).ready(function() {
-   var dropZone = document.getElementById('fileinput');
-   dropZone.addEventListener('dragover', handleDragOver, false);
-   dropZone.addEventListener('drop', handleFileSelect, false);
-   $("#fileinput").change(calculate);
    if (window.localStorage && localStorage.initialinput && localStorage.finaloutput)
    {
     out.className = 'unhidden';
     initialinput.innerHTML = localStorage.initialinput;
     finaloutput.innerHTML = localStorage.finaloutput;
    }
+   var dropZone = document.getElementById('fileinput');
+   dropZone.addEventListener('dragover', handleDragOver, false);
+   dropZone.addEventListener('drop', handleFileSelect, false);
+   $("#fileinput").change(calculate);
 });
 
 // main
@@ -19,7 +19,7 @@ function calculate(evt) {
 
   if (f) {
     var r = new FileReader();
-    r.onload = function(e) { 
+    r.onload = function(e) {
       var contents = e.target.result;
       
       var tokens = lexer(contents);
@@ -28,6 +28,7 @@ function calculate(evt) {
       out.className = 'unhidden';
       initialinput.innerHTML = contents;
       finaloutput.innerHTML = pretty;
+      
       
       if (window.localStorage)
       {
@@ -85,7 +86,7 @@ function tokensToString(tokens) {
    for(var i in tokens) {
      var t = tokens[i];
      var s = JSON.stringify(t, undefined, 2);
-     s = _.template(temp, {token: t, match: s});
+     s = _.template(externScript.innerHTML, {token: t, match: s});
      r += s;
    }
    return '<ol>\n'+r+'</ol>';
