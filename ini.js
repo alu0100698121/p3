@@ -62,7 +62,15 @@ function handleFileSelect(evt) {
 			out.className = 'unhidden';
 			initialinput.innerHTML = contents;
 			finaloutput.innerHTML = pretty;
+			
+			if (window.localStorage)
+			{
+			    localStorage.initialinput = contents; 
+			    localStorage.finaloutput = pretty;
+			}
 		}
+		
+
 	
 		r.readAsText(f);
 		output.push(r);
