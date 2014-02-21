@@ -23,12 +23,17 @@ tr:nth-child(even)    { background-color:#00FF66; }
 #fileinput{
 	width:10%;
     background-color: black;
+	border: outset; 
+	border-color: white;
     color: white;
     padding: 40px 40px;
     text-align: left;
+	margin-left:auto; margin-right:auto;
 }
+h1{color:white;}
+i{ color: white;}
 textarea     { border: outset; border-color: white;       }                        
-table        { border: inset; border-color: white; }
+table        { border: inset; border-color: white; margin-left:auto; margin-right:auto; }
 .hidden      { display: none; }
 .unhidden    { display: block; }
 table.center { margin-left:auto; margin-right:auto; }
